@@ -18,7 +18,7 @@
 		<table class="table table-success table-striped">
 		  <thead>
 		    <tr>
-		      <th>No</th><th>ジャンル</th><th>本の名前</th><th>作者</th><th>出版社</th><th>コメント</th>
+		      <th>No</th><th>ジャンル</th><th>本の名前</th><th>作者</th><th>出版社</th><th>コメント</th><th>本の編集</th><th>本の削除</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -29,9 +29,18 @@
 	            <td th:text="${list.author}"></td>
 	            <td th:text="${list.publisher}"></td>
 	            <td th:text="${list.comment}"></td>
+	            <td>
+                	<a href="#" th:href="@{'/edit/' + ${list.id}}"><button>更新</button></a>
+            	</td>
+            	<td>
+                	<form action="#" th:action="@{'/delete/' + ${list.id}}" method="post">
+                    	<button>削除</button>
+                	</form>
+            	</td>
 	        </tr>
 		  </tbody>
 		</table>
+		<div><a href="#" th:href="@{/form}"><button>登録</button></a></div>
 	</div>
 
 	<!-- Option 1: Bootstrap Bundle with Popper -->

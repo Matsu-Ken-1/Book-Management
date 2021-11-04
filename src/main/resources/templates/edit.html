@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>UpdateBook</title>
+	</head>
+	<body>
+		<h1>本の編集</h1>
+		<form method="post" action="#" th:action="@{'/edit/' + ${bookForm.id}}" th:object="${bookForm}">
+			<label for="genre">ジャンル：</label>
+			<input type="text" id="genre" name="genre" th:value="${bookForm.genre}"><br>
+			<label for="bookname">本の名前：</label>
+			<input type="text" id="bookname" name="bookname" th:value="${bookForm.bookname}"><br>
+			<label for="author">作者：</label>
+			<input type="text" id="author" name="author" th:value="${bookForm.author}"><br>
+			<label for="publisher">出版社：</label>
+			<input type="text" id="publisher" name="publisher" th:value="${bookForm.publisher}"><br>
+			<label for="comment">コメント：</label>
+			<input type="text" id="comment" name="comment" th:value="${bookForm.comment}"><br>
+			<input type="submit" value="更新">
+		</form>
+		<div><a href="#" th:href="@{/}">一覧へ</a></div>
+	</body>
 </html>
