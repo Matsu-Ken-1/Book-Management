@@ -26,7 +26,7 @@ public class BookController {
 	}
 	
 	// 一覧画面の表示
-	@GetMapping
+	@GetMapping("/index")
 	public String index(Model model) {
 		String sql = "SELECT * FROM bookinfo";
 		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
@@ -45,7 +45,7 @@ public class BookController {
 	public String create(BookForm bookForm) {
 		String sql = "INSERT INTO bookinfo(genre, bookname, author, publisher, comment) VALUES(?, ?, ?, ?, ?);";
 		jdbcTemplate.update(sql, bookForm.getGenre(), bookForm.getBookname(), bookForm.getAuthor(), bookForm.getPublisher(), bookForm.getComment());
-		return "redirect:/";
+		return "redirect:/index";
 	}
 	
 	// 編集フォームの表示
@@ -67,7 +67,7 @@ public class BookController {
 	public String update(BookForm bookForm, @PathVariable int id) {
 		String sql = "UPDATE bookinfo SET genre = ?, bookname = ?, author = ?, publisher = ?, comment = ? WHERE id = " + id;
 		jdbcTemplate.update(sql, bookForm.getGenre(), bookForm.getBookname(), bookForm.getAuthor(), bookForm.getPublisher(), bookForm.getComment());
-		return "redirect:/";
+		return "redirect:/index";
 	}
 	
 	// データの削除
@@ -75,7 +75,7 @@ public class BookController {
 	public String delete(@PathVariable int id) {
 		String sql = "DELETE from bookinfo WHERE id = " + id;
 		jdbcTemplate.update(sql);
-		return "redirect:/";
+		return "redirect:/index";
 	}
 	
 }
