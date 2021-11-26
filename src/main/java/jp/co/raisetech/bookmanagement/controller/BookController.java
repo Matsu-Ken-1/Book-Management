@@ -1,4 +1,4 @@
-package jp.co.raisetech.bookmanagement; 
+package jp.co.raisetech.bookmanagement.controller; 
 
 import java.util.List;
 import java.util.Map;
@@ -13,11 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.raisetech.bookmanagement.entity.BookForm;
+import jp.co.raisetech.bookmanagement.service.BookService;
+
 @Controller
 @RequestMapping("/")
 public class BookController {
 	
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	BookService service;
 	
 	// コンストラクタ
 	@Autowired
@@ -28,8 +34,7 @@ public class BookController {
 	// 一覧画面の表示
 	@GetMapping("/index")
 	public String index(Model model) {
-		String sql = "SELECT * FROM bookinfo";
-		List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
+		List<BookForm> list = service.getBookList();
 		model.addAttribute("list", list);
 		return "/index";
 	}

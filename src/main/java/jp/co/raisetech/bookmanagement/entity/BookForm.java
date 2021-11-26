@@ -1,4 +1,4 @@
-package jp.co.raisetech.bookmanagement;
+package jp.co.raisetech.bookmanagement.entity;
 
 public class BookForm {
 
