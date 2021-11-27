@@ -48,8 +48,9 @@ public class BookController {
 	// 新規入力データの保存
 	@PostMapping("/")
 	public String create(BookForm bookForm) {
-		String sql = "INSERT INTO bookinfo(genre, bookname, author, publisher, comment) VALUES(?, ?, ?, ?, ?);";
-		jdbcTemplate.update(sql, bookForm.getGenre(), bookForm.getBookname(), bookForm.getAuthor(), bookForm.getPublisher(), bookForm.getComment());
+//		String sql = "INSERT INTO bookinfo(genre, bookname, author, publisher, comment) VALUES(?, ?, ?, ?, ?);";
+//		jdbcTemplate.update(sql, bookForm.getGenre(), bookForm.getBookname(), bookForm.getAuthor(), bookForm.getPublisher(), bookForm.getComment());
+		service.create(bookForm);
 		return "redirect:/index";
 	}
 	
@@ -77,9 +78,10 @@ public class BookController {
 	
 	// データの削除
 	@PostMapping("/delete/{id}")
-	public String delete(@PathVariable int id) {
-		String sql = "DELETE from bookinfo WHERE id = " + id;
-		jdbcTemplate.update(sql);
+	public String delete(@PathVariable Long id) {
+//		String sql = "DELETE from bookinfo WHERE id = " + id;
+//		jdbcTemplate.update(sql);
+		service.delete(id);
 		return "redirect:/index";
 	}
 	

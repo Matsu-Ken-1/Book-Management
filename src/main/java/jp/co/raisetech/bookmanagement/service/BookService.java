@@ -14,9 +14,19 @@ public class BookService {
 	@Autowired
 	BookMapper mapper;
 	
-	// ブックリストを全件取得
+	// 本のリストを全件取得
 	public List<BookForm> getBookList() {
 		return mapper.selectAll();
+	}
+	
+	// 本の登録
+	public int create(BookForm book) {
+		return mapper.insert(book);
+	}
+	
+	// 本の削除
+	public int delete(Long id) {
+		return mapper.delete(id);
 	}
 
 }

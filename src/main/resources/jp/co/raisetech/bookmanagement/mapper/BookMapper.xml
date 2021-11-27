@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.raisetech.bookmanagement.mapper.BookMapper">
   <select id="selectAll" resultType="jp.co.raisetech.bookmanagement.entity.BookForm">
-    select * from bookinfo
+    SELECT * FROM bookinfo
   </select>
+  
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO bookinfo (genre, bookname, author, publisher, comment) VALUES (#{book.genre}, #{book.bookname}, #{book.author}, #{book.publisher}, #{book.comment})
+  </insert>
+  
+  <delete id="delete">
+    DELETE FROM bookinfo WHERE id = #{id}
+  </delete>
 </mapper>
