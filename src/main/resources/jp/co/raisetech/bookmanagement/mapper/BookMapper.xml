@@ -7,9 +7,17 @@
     SELECT * FROM bookinfo
   </select>
   
+  <select id="findById" resultType="jp.co.raisetech.bookmanagement.entity.BookForm">
+    SELECT id, genre, bookname, author, publisher, comment FROM bookinfo WHERE id = #{id}
+  </select>
+  
   <insert id="insert" useGeneratedKeys="true" keyProperty="id">
     INSERT INTO bookinfo (genre, bookname, author, publisher, comment) VALUES (#{book.genre}, #{book.bookname}, #{book.author}, #{book.publisher}, #{book.comment})
   </insert>
+  
+  <update id="update">
+    UPDATE bookinfo SET genre = #{book.genre}, bookname = #{book.bookname}, author = #{book.author}, publisher = #{book.publisher}, comment = #{book.comment} where id = #{id}
+  </update>
   
   <delete id="delete">
     DELETE FROM bookinfo WHERE id = #{id}

@@ -19,9 +19,19 @@ public class BookService {
 		return mapper.selectAll();
 	}
 	
+	// 指定IDのデータ取得
+	public BookForm findById(Long id) {
+		return mapper.findById(id);
+	}
+	
 	// 本の登録
 	public int create(BookForm book) {
 		return mapper.insert(book);
+	}
+	
+	// 本の更新
+	public int update(BookForm book, int id) {
+		return mapper.update(book, id);
 	}
 	
 	// 本の削除

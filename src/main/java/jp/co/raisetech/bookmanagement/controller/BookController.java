@@ -1,7 +1,6 @@
 package jp.co.raisetech.bookmanagement.controller; 
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -56,23 +55,28 @@ public class BookController {
 	
 	// 編集フォームの表示
 	@GetMapping("/edit/{id}")
-	public String edit(@ModelAttribute BookForm bookForm, @PathVariable int id) {
-		String sql = "SELECT * FROM bookinfo WHERE id = " + id;
-		Map<String, Object> map = jdbcTemplate.queryForMap(sql);
-		bookForm.setId((int)map.get("id"));
-		bookForm.setGenre((String)map.get("genre"));
-		bookForm.setBookname((String)map.get("bookname"));
-		bookForm.setAuthor((String)map.get("author"));
-		bookForm.setPublisher((String)map.get("publisher"));
-		bookForm.setComment((String)map.get("Comment"));
+//	public String edit(@ModelAttribute BookForm bookForm, @PathVariable Long id) {
+	public String edit(Model model, @PathVariable Long id) {
+//		String sql = "SELECT * FROM bookinfo WHERE id = " + id;
+//		Map<String, Object> map = jdbcTemplate.queryForMap(sql);
+		BookForm bookForm = service.findById(id);
+//		bookForm.setId((int)bookForm.getId());
+//		bookForm.setGenre((String)bookForm.getGenre());
+//		bookForm.setBookname((String)bookForm.getBookname());
+//		bookForm.setAuthor((String)bookForm.getAuthor());
+//		bookForm.setPublisher((String)bookForm.getPublisher());
+//		bookForm.setComment((String)bookForm.getComment());
+//		BeanUtils.copyProperties(bookForms, bookForm);
+		model.addAttribute("bookForm", bookForm);
 		return "/edit";
 	}
 	
 	// 編集データの保存
 	@PostMapping("/edit/{id}")
 	public String update(BookForm bookForm, @PathVariable int id) {
-		String sql = "UPDATE bookinfo SET genre = ?, bookname = ?, author = ?, publisher = ?, comment = ? WHERE id = " + id;
-		jdbcTemplate.update(sql, bookForm.getGenre(), bookForm.getBookname(), bookForm.getAuthor(), bookForm.getPublisher(), bookForm.getComment());
+//		String sql = "UPDATE bookinfo SET genre = ?, bookname = ?, author = ?, publisher = ?, comment = ? WHERE id = " + id;
+//		jdbcTemplate.update(sql, bookForm.getGenre(), bookForm.getBookname(), bookForm.getAuthor(), bookForm.getPublisher(), bookForm.getComment());
+		service.update(bookForm, id);
 		return "redirect:/index";
 	}
 	
