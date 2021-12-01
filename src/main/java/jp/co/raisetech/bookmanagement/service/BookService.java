@@ -30,8 +30,9 @@ public class BookService {
 	}
 	
 	// 本の更新
-	public int update(BookForm book, int id) {
-		return mapper.update(book, id);
+	public void update(BookForm book, int id) {
+//		return mapper.update(book, id);
+		mapper.update(book, id);
 	}
 	
 	// 本の削除

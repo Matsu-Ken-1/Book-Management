@@ -17,7 +17,7 @@
 			<input type="text" id="publisher" name="publisher" th:value="${bookForm.publisher}"><br>
 			<label for="comment">コメント：</label>
 			<input type="text" id="comment" name="comment" th:value="${bookForm.comment}"><br>
-			<input type="hidden" id="id" name="id" value="${bookForm.id}">
+			<input type="hidden" id="id" name="id" th:value="${bookForm.id}">
 			<input type="submit" value="更新">
 		</form>
 		<div><a href="#" th:href="@{/index}">一覧へ</a></div>

@@ -20,7 +20,7 @@ public interface BookMapper {
 	public int insert(@Param("book") BookForm book);
 	
 	// 本の更新
-	public int update(@Param("book") BookForm book, @Param("id") int id);
+	public void update(@Param("book") BookForm book, @Param("id") int id);
 	
 	// 本の削除
 	public int delete(@Param("id") Long id);
