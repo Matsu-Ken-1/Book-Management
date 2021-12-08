@@ -3,7 +3,6 @@ package jp.co.raisetech.bookmanagement.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,24 +18,35 @@ import jp.co.raisetech.bookmanagement.service.BookService;
 @RequestMapping("/")
 public class BookController {
 	
-	private JdbcTemplate jdbcTemplate;
+//	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
 	BookService service;
 	
-	// コンストラクタ
-	@Autowired
-	public BookController(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
+//	// コンストラクタ
+//	@Autowired
+//	public BookController(JdbcTemplate jdbcTemplate) {
+//		this.jdbcTemplate = jdbcTemplate;
+//	}
 	
 	// 一覧画面の表示
 	@GetMapping("/index")
-	public String index(Model model) {
+	public String index(BookForm bookform, Model model) {
 		List<BookForm> list = service.getBookList();
 		model.addAttribute("list", list);
 		return "/index";
 	}
+	
+	// 検索結果の受け取り処理
+	@GetMapping("/search")
+    public String select(@ModelAttribute("bookForm") BookForm bookform, Model model) {
+
+        //bookdataのゲッターで各値を取得する
+        List<BookForm> result = service.search(bookform.getGenre(),bookform.getBookname(), bookform.getAuthor());
+        model.addAttribute("list", result);
+
+        return "/index";
+    }
 	
 	// 新規入力フォームの表示
 	@GetMapping("/form")
@@ -56,7 +66,7 @@ public class BookController {
 	// 編集フォームの表示
 	@GetMapping("/edit/{id}")
 //	public String edit(@ModelAttribute BookForm bookForm, @PathVariable Long id) {
-	public String edit(Model model, @PathVariable Long id) {
+	public String edit(Model model, @PathVariable int id) {
 //		String sql = "SELECT * FROM bookinfo WHERE id = " + id;
 //		Map<String, Object> map = jdbcTemplate.queryForMap(sql);
 		BookForm bookForm = service.findById(id);
@@ -82,7 +92,7 @@ public class BookController {
 	
 	// データの削除
 	@PostMapping("/delete/{id}")
-	public String delete(@PathVariable Long id) {
+	public String delete(@PathVariable int id) {
 //		String sql = "DELETE from bookinfo WHERE id = " + id;
 //		jdbcTemplate.update(sql);
 		service.delete(id);

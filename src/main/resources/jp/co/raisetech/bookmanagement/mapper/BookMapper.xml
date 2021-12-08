@@ -22,4 +22,19 @@
   <delete id="delete">
     DELETE FROM bookinfo WHERE id = #{id}
   </delete>
+  
+  <select id="search" resultType="jp.co.raisetech.bookmanagement.entity.BookForm">
+  	SELECT * FROM bookinfo
+  	<where>
+  		<if test="genre != null">
+			AND genre LIKE CONCAT(#{genre}, '%')
+		</if>
+	 	<if test="bookname != null">
+			AND bookname LIKE CONCAT(#{bookname}, '%')
+		</if>
+		<if test="author != null">
+			AND author LIKE CONCAT(#{author}, '%')
+		</if>
+	</where>
+  </select>
 </mapper>

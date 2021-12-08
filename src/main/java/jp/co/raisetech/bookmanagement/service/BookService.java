@@ -1,5 +1,6 @@
 package jp.co.raisetech.bookmanagement.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,13 @@ public class BookService {
 	}
 	
 	// 指定IDのデータ取得
-	public BookForm findById(Long id) {
+	public BookForm findById(int id) {
 		return mapper.findById(id);
 	}
 	
 	// 本の登録
-	public int create(BookForm book) {
-		return mapper.insert(book);
+	public void create(BookForm book) {
+		mapper.insert(book);
 	}
 	
 	// 本の更新
@@ -36,8 +37,27 @@ public class BookService {
 	}
 	
 	// 本の削除
-	public int delete(Long id) {
-		return mapper.delete(id);
+	public void delete(int id) {
+//		return mapper.delete(id);
+		mapper.delete(id);
 	}
+	
+	// 本の検索
+    public List<BookForm> search(String genre, String bookname, String author){
+
+        List<BookForm> result = new ArrayList<BookForm>();
+
+        //すべてブランクだった場合は全件検索する
+        if ("".equals(genre) && "".equals(bookname) && "".equals(author)){
+            result = mapper.selectAll();
+        }
+        else {
+            //上記以外の場合、BookDataDaoImplのメソッドを呼び出す
+            result = mapper.search(genre, bookname, author);
+        }
+        return result;
+    }
+	
+	
 
 }

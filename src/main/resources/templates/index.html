@@ -14,31 +14,43 @@
 
 	<div class="container">
 	 	<h1>本の一覧</h1>
-		
+	 	<br>
+		<form action="/search" method="get" th:object="${bookForm}">
+			<label>ジャンル :</label>
+			<input type="text" name="genre" th:value="*{genre}"><br>
+			<br>
+			<label>本の名前 :</label>
+			<input type="text" name="bookname" th:value="*{bookname}"><br>
+			<br>
+			<label>作者　　 :</label>
+			<input type="text" name="author" th:value="*{author}">　
+			<input type="submit" value="検索">
+		</form>
+		<br>
 		<table class="table table-success table-striped">
-		  <thead>
-		    <tr>
-		      <th>No</th><th>ジャンル</th><th>本の名前</th><th>作者</th><th>出版社</th><th>コメント</th><th>本の編集</th><th>本の削除</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr th:each="list : ${list}">
-	            <td th:text="${list.id}"></td>
-	            <td th:text="${list.genre}"></td>
-	            <td th:text="${list.bookname}"></td>
-	            <td th:text="${list.author}"></td>
-	            <td th:text="${list.publisher}"></td>
-	            <td th:text="${list.comment}"></td>
-	            <td>
-                	<a href="#" th:href="@{'/edit/' + ${list.id}}"><button>更新</button></a>
-            	</td>
-            	<td>
-                	<form action="#" th:action="@{'/delete/' + ${list.id}}" method="post">
-                    	<button>削除</button>
-                	</form>
-            	</td>
-	        </tr>
-		  </tbody>
+		  	<thead>
+		    	<tr>
+		      	<th>No</th><th>ジャンル</th><th>本の名前</th><th>作者</th><th>出版社</th><th>コメント</th><th>本の編集</th><th>本の削除</th>
+		    	</tr>
+		  	</thead>
+		  	<tbody>
+				<tr th:each="list : ${list}">
+					<td th:text="${list.id}"></td>
+					<td th:text="${list.genre}"></td>
+					<td th:text="${list.bookname}"></td>
+					<td th:text="${list.author}"></td>
+					<td th:text="${list.publisher}"></td>
+					<td th:text="${list.comment}"></td>
+					<td>
+						<a href="#" th:href="@{'/edit/' + ${list.id}}"><button>更新</button></a>
+					</td>
+					<td>
+						<form action="#" th:action="@{'/delete/' + ${list.id}}" method="post">
+							<button>削除</button>
+						</form>
+					</td>
+				</tr>
+		  	</tbody>
 		</table>
 		<div><a href="#" th:href="@{/form}"><button>登録</button></a></div>
 	</div>
