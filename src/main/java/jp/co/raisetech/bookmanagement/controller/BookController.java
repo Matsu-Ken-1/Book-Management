@@ -11,38 +11,35 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.raisetech.bookmanagement.entity.BookForm;
+import jp.co.raisetech.bookmanagement.entity.Book;
+import jp.co.raisetech.bookmanagement.entity.Genre;
 import jp.co.raisetech.bookmanagement.service.BookService;
+import jp.co.raisetech.bookmanagement.service.GenreService;
 
 @Controller
 @RequestMapping("/")
 public class BookController {
 	
-//	private JdbcTemplate jdbcTemplate;
-	
 	@Autowired
 	BookService service;
 	
-//	// コンストラクタ
-//	@Autowired
-//	public BookController(JdbcTemplate jdbcTemplate) {
-//		this.jdbcTemplate = jdbcTemplate;
-//	}
+	@Autowired
+	GenreService genre;
 	
 	// 一覧画面の表示
 	@GetMapping("/index")
-	public String index(BookForm bookform, Model model) {
-		List<BookForm> list = service.getBookList();
+	public String index(Book book, Model model) {
+		List<Book> list = service.getBookList();
 		model.addAttribute("list", list);
 		return "/index";
 	}
 	
 	// 検索結果の受け取り処理
 	@GetMapping("/search")
-    public String select(@ModelAttribute("bookForm") BookForm bookform, Model model) {
+    public String select(@ModelAttribute("book") Book book, Model model) {
 
         //bookdataのゲッターで各値を取得する
-        List<BookForm> result = service.search(bookform.getGenre(),bookform.getBookname(), bookform.getAuthor());
+        List<Book> result = service.search(book.getGenre(),book.getBookname(), book.getAuthor());
         model.addAttribute("list", result);
 
         return "/index";
@@ -50,51 +47,40 @@ public class BookController {
 	
 	// 新規入力フォームの表示
 	@GetMapping("/form")
-	public String form(@ModelAttribute BookForm bookform) {
+	public String form(@ModelAttribute Book book, Model model) {
+		
+		// ジャンルのプルダン項目取得
+		List<Genre> genreList = genre.getGenreList();
+		model.addAttribute("genreList", genreList);
+		
 		return "/form";
 	}
 	
 	// 新規入力データの保存
 	@PostMapping("/")
-	public String create(BookForm bookForm) {
-//		String sql = "INSERT INTO bookinfo(genre, bookname, author, publisher, comment) VALUES(?, ?, ?, ?, ?);";
-//		jdbcTemplate.update(sql, bookForm.getGenre(), bookForm.getBookname(), bookForm.getAuthor(), bookForm.getPublisher(), bookForm.getComment());
-		service.create(bookForm);
+	public String create(Book book) {
+		service.create(book);
 		return "redirect:/index";
 	}
 	
 	// 編集フォームの表示
 	@GetMapping("/edit/{id}")
-//	public String edit(@ModelAttribute BookForm bookForm, @PathVariable Long id) {
 	public String edit(Model model, @PathVariable int id) {
-//		String sql = "SELECT * FROM bookinfo WHERE id = " + id;
-//		Map<String, Object> map = jdbcTemplate.queryForMap(sql);
-		BookForm bookForm = service.findById(id);
-//		bookForm.setId((int)bookForm.getId());
-//		bookForm.setGenre((String)bookForm.getGenre());
-//		bookForm.setBookname((String)bookForm.getBookname());
-//		bookForm.setAuthor((String)bookForm.getAuthor());
-//		bookForm.setPublisher((String)bookForm.getPublisher());
-//		bookForm.setComment((String)bookForm.getComment());
-//		BeanUtils.copyProperties(bookForms, bookForm);
-		model.addAttribute("bookForm", bookForm);
+		Book book = service.findById(id);
+		model.addAttribute("book", book);
 		return "/edit";
 	}
 	
 	// 編集データの保存
 	@PostMapping("/edit/{id}")
-	public String update(BookForm bookForm, @PathVariable int id) {
-//		String sql = "UPDATE bookinfo SET genre = ?, bookname = ?, author = ?, publisher = ?, comment = ? WHERE id = " + id;
-//		jdbcTemplate.update(sql, bookForm.getGenre(), bookForm.getBookname(), bookForm.getAuthor(), bookForm.getPublisher(), bookForm.getComment());
-		service.update(bookForm, id);
+	public String update(Book book, @PathVariable int id) {
+		service.update(book, id);
 		return "redirect:/index";
 	}
 	
 	// データの削除
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
-//		String sql = "DELETE from bookinfo WHERE id = " + id;
-//		jdbcTemplate.update(sql);
 		service.delete(id);
 		return "redirect:/index";
 	}

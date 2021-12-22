@@ -6,20 +6,26 @@
 	</head>
 	<body>
 		<h1>本の編集</h1>
-		<form method="post" action="#" th:action="@{'/edit/' + ${bookForm.id}}" th:object="${bookForm}">
+		<form method="post" action="#" th:action="@{'/edit/' + ${book.id}}" th:object="${book}">
 			<label for="genre">ジャンル：</label>
-			<input type="text" id="genre" name="genre" th:value="${bookForm.genre}"><br>
+			<input type="text" id="genre" name="genre" th:value="${book.genre}"><br>
+			<br>
 			<label for="bookname">本の名前：</label>
-			<input type="text" id="bookname" name="bookname" th:value="${bookForm.bookname}"><br>
-			<label for="author">作者：</label>
-			<input type="text" id="author" name="author" th:value="${bookForm.author}"><br>
-			<label for="publisher">出版社：</label>
-			<input type="text" id="publisher" name="publisher" th:value="${bookForm.publisher}"><br>
+			<input type="text" id="bookname" name="bookname" th:value="${book.bookname}"><br>
+			<br>
+			<label for="author">作者　　：</label>
+			<input type="text" id="author" name="author" th:value="${book.author}"><br>
+			<br>
+			<label for="publisher">出版社　：</label>
+			<input type="text" id="publisher" name="publisher" th:value="${book.publisher}"><br>
+			<br>
 			<label for="comment">コメント：</label>
-			<input type="text" id="comment" name="comment" th:value="${bookForm.comment}"><br>
-			<input type="hidden" id="id" name="id" th:value="${bookForm.id}">
+			<input type="text" id="comment" name="comment" th:value="${book.comment}"><br>
+			<br>
+			<input type="hidden" id="id" name="id" th:value="${book.id}">
 			<input type="submit" value="更新">
 		</form>
+		<br>
 		<div><a href="#" th:href="@{/index}">一覧へ</a></div>
 	</body>
 </html>

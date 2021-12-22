@@ -3,11 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.raisetech.bookmanagement.mapper.BookMapper">
-  <select id="selectAll" resultType="jp.co.raisetech.bookmanagement.entity.BookForm">
+  <select id="selectAll" resultType="jp.co.raisetech.bookmanagement.entity.Book">
     SELECT * FROM bookinfo
   </select>
   
-  <select id="findById" resultType="jp.co.raisetech.bookmanagement.entity.BookForm">
+  <select id="findById" resultType="jp.co.raisetech.bookmanagement.entity.Book">
     SELECT id, genre, bookname, author, publisher, comment FROM bookinfo WHERE id = #{id}
   </select>
   
@@ -23,7 +23,7 @@
     DELETE FROM bookinfo WHERE id = #{id}
   </delete>
   
-  <select id="search" resultType="jp.co.raisetech.bookmanagement.entity.BookForm">
+  <select id="search" resultType="jp.co.raisetech.bookmanagement.entity.Book">
   	SELECT * FROM bookinfo
   	<where>
   		<if test="genre != null">

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.raisetech.bookmanagement.entity.BookForm;
+import jp.co.raisetech.bookmanagement.entity.Book;
 import jp.co.raisetech.bookmanagement.mapper.BookMapper;
 
 @Service
@@ -16,22 +16,22 @@ public class BookService {
 	BookMapper mapper;
 	
 	// 本のリストを全件取得
-	public List<BookForm> getBookList() {
+	public List<Book> getBookList() {
 		return mapper.selectAll();
 	}
 	
 	// 指定IDのデータ取得
-	public BookForm findById(int id) {
+	public Book findById(int id) {
 		return mapper.findById(id);
 	}
 	
 	// 本の登録
-	public void create(BookForm book) {
+	public void create(Book book) {
 		mapper.insert(book);
 	}
 	
 	// 本の更新
-	public void update(BookForm book, int id) {
+	public void update(Book book, int id) {
 //		return mapper.update(book, id);
 		mapper.update(book, id);
 	}
@@ -43,9 +43,9 @@ public class BookService {
 	}
 	
 	// 本の検索
-    public List<BookForm> search(String genre, String bookname, String author){
+    public List<Book> search(String genre, String bookname, String author){
 
-        List<BookForm> result = new ArrayList<BookForm>();
+        List<Book> result = new ArrayList<Book>();
 
         //すべてブランクだった場合は全件検索する
         if ("".equals(genre) && "".equals(bookname) && "".equals(author)){

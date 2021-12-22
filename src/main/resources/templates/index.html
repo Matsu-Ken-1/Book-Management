@@ -13,17 +13,17 @@
 <body>
 
 	<div class="container">
-	 	<h1>本の一覧</h1>
+	 	<h1>【本の一覧】</h1>
 	 	<br>
-		<form action="/search" method="get" th:object="${bookForm}">
+		<form action="/search" method="get" th:object="${book}">
 			<label>ジャンル :</label>
-			<input type="text" name="genre" th:value="*{genre}"><br>
+			<input type="text" size="100" name="genre" th:value="*{genre}"><br>
 			<br>
 			<label>本の名前 :</label>
-			<input type="text" name="bookname" th:value="*{bookname}"><br>
+			<input type="text" size="100" name="bookname" th:value="*{bookname}"><br>
 			<br>
 			<label>作者　　 :</label>
-			<input type="text" name="author" th:value="*{author}">　
+			<input type="text" size="100" name="author" th:value="*{author}">　
 			<input type="submit" value="検索">
 		</form>
 		<br>

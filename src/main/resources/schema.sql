@@ -10,3 +10,11 @@ CREATE TABLE bookinfo
    comment VARCHAR(1000) NOT NULL,
    PRIMARY KEY(id)
 );
+
+DROP TABLE IF EXISTS genre;
+
+CREATE TABLE genre
+(
+   code VARCHAR(2) NOT NULL,
+   name VARCHAR(30) NOT NULL
+);

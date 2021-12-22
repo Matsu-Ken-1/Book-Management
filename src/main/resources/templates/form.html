@@ -6,19 +6,35 @@
 	</head>
 	<body>
 		<h1>新規登録</h1>
-		<form method="post" action="#" th:action="@{/}" th:object="${bookForm}">
+		<form method="post" action="#" th:action="@{/}" th:object="${book}">
 			<label for="genre">ジャンル：</label>
-			<input type="text" id="genre" name="genre" th:value="${bookForm.genre}">
+			<!--  <input type="text" id="genre" name="genre" th:value="${bookForm.genre}"><br> -->
+			<select id="genre" name="genre">
+				<option value="00"></option>
+				<option
+					th:each="genre : ${genreList}"
+					th:value="${genre.name}"
+					th:text="${genre.name}"
+					th:selected="${genre.code == selectedValue}">
+				</option>
+			</select>
+			<br>
+			<br>
 			<label for="bookname">本の名前：</label>
-			<input type="text" id="bookname" name="bookname" th:value="${bookForm.bookname}">
-			<label for="author">作者：</label>
-			<input type="text" id="author" name="author" th:value="${bookForm.author}">
-			<label for="publisher">出版社：</label>
-			<input type="text" id="publisher" name="publisher" th:value="${bookForm.publisher}">
+			<input type="text" id="bookname" name="bookname" th:value="${book.bookname}"><br>
+			<br>
+			<label for="author">作者　　：</label>
+			<input type="text" id="author" name="author" th:value="${book.author}"><br>
+			<br>
+			<label for="publisher">出版社　：</label>
+			<input type="text" id="publisher" name="publisher" th:value="${book.publisher}"><br>
+			<br>
 			<label for="comment">コメント：</label>
-			<input type="text" id="comment" name="comment" th:value="${bookForm.comment}">
+			<input type="text" id="comment" name="comment" th:value="${book.comment}"><br>
+			<br>
 			<input type="submit" value="登録">
 		</form>
-		<div><a href="#" th:href="@{/}">一覧へ</a></div>
+		<br>
+		<div><a href="#" th:href="@{/index}">一覧へ</a></div>
 	</body>
 </html>

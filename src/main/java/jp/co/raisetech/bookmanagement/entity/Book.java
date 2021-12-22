@@ -1,6 +1,6 @@
 package jp.co.raisetech.bookmanagement.entity;
 
-public class BookForm {
+public class Book {
 
 	// ID
 	private Integer id;
