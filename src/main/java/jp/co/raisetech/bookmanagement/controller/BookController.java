@@ -84,5 +84,4 @@ public class BookController {
 		service.delete(id);
 		return "redirect:/index";
 	}
-	
 }
